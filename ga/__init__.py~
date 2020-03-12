@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+
+import numpy as np
+from numpy import linalg
+import itertools
+
+class ga(object):
+    def __init__(self,num_dim):
+        self.blades = []
+        vec_nums = np.arange(1,num_dim+1)
+        vecs = ['e'+str(i) for i in vec_nums]
+        vecs += ['-e'+str(i) for i in vec_nums]
+        dim_vec = {0:[0,1],1:vecs}
+        for i in np.arange(2,num_dim+1):
+            dim_vec[i] = [zip(x,dim_vec[1]) for x in itertools.permutations(dim_vec[i-1],2)]
+
+        for each in dim_vec:
+            print(len(dim_vec[each]))
+            print(set(dim_vec[each]))
+
+if __name__=='__main__':
+    g = ga(3)
